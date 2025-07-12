@@ -6,7 +6,6 @@ import { themes } from "./db";
 
 function App() {
   const [defaultThemes, setDefaultThemes] = useState(themes); //wie kann man den state noch etwas schöner benennen?
-  console.log(defaultThemes);
 
   const handleAddTheme = (event) => {
     event.preventDefault();
@@ -37,12 +36,20 @@ function App() {
     form.reset(); // optional: Formular zurücksetzen
   };
 
+  const handleDeleteTheme = (id) => {
+    const decreasedThemes = defaultThemes.filter((theme) => theme.id !== id); //nur objekte kommen in das neue array deren id nicht identisch sind (mit der gedrückten id)
+    setDefaultThemes(decreasedThemes);
+  };
+
   return (
     <>
       <header className="header">Theme Creator</header>
       <main>
         <ThemeForm handleAddTheme={handleAddTheme} />
-        <Theme defaultThemes={defaultThemes} />
+        <Theme
+          defaultThemes={defaultThemes}
+          handleDeleteTheme={handleDeleteTheme}
+        />
       </main>
     </>
   );

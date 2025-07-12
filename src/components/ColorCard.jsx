@@ -1,7 +1,6 @@
 import "./ColorCard.css";
 
 export default function ColorCard({ role, value }) {
-  console.log(role, value);
   return (
     <article className="color__card">
       <div className="color__info">

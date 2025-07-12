@@ -2,7 +2,7 @@ import ColorCard from "./ColorCard";
 import { ColorPreview } from "./ColorPreview";
 import { useState } from "react";
 
-export function Theme({ defaultThemes }) {
+export function Theme({ defaultThemes, handleDeleteTheme }) {
   const [view, setView] = useState(false);
 
   const handleClickView = (id) => {
@@ -21,17 +21,22 @@ export function Theme({ defaultThemes }) {
             {view[theme.id] ? "⬆️" : "⬇️"}
           </button>
           {view[theme.id] ? (
-            <ul className="colorcard__list">
-              <li key={theme.id}>
-                {theme.colors.map((color) => (
-                  <ColorCard
-                    key={color.name}
-                    value={color.value}
-                    role={color.role}
-                  />
-                ))}
-              </li>
-            </ul>
+            <>
+              <button onClick={() => handleDeleteTheme(theme.id)}>
+                Delete
+              </button>
+              <ul className="colorcard__list">
+                <li key={theme.id}>
+                  {theme.colors.map((color) => (
+                    <ColorCard
+                      key={color.name}
+                      value={color.value}
+                      role={color.role}
+                    />
+                  ))}
+                </li>
+              </ul>
+            </>
           ) : (
             <article className="preview">
               {theme.colors.map((color) => (
