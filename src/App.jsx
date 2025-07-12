@@ -1,24 +1,17 @@
 import "./App.css";
-import ColorCard from "./ColorCard";
-import { themes } from "./db.js";
+import { Theme } from "./components/Theme";
 
 function App() {
-  const theme = themes[0];
   return (
     <>
       <header className="header">Theme Creator</header>
       <main>
-        <h2 className="name">{theme.name}</h2>
-        <ul className="colorcard__list">
-          <li key={theme.id}>
-            {theme.colors.map((color, index) => (
-              <ColorCard key={index} value={color.value} role={color.role} />
-            ))}
-          </li>
-        </ul>
+        <Theme />
       </main>
     </>
   );
 }
 
 export default App;
+
+// App.jsx nehme ich nur als sammelpunkt für meine komponente und wende hier keine logik an
