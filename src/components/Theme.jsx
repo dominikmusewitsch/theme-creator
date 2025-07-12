@@ -1,9 +1,8 @@
-import { themes } from "../db";
 import ColorCard from "./ColorCard";
 import { ColorPreview } from "./ColorPreview";
 import { useState } from "react";
 
-export function Theme() {
+export function Theme({ defaultThemes }) {
   const [view, setView] = useState(false);
 
   const handleClickView = (id) => {
@@ -15,7 +14,7 @@ export function Theme() {
 
   return (
     <div>
-      {themes.map((theme) => (
+      {defaultThemes.map((theme) => (
         <>
           <h2 className="name">{theme.name}</h2>
           <button onClick={() => handleClickView(theme.id)}>
