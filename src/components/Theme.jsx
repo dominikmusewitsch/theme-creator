@@ -14,8 +14,8 @@ export function Theme({ defaultThemes, handleDeleteTheme }) {
 
   return (
     <div>
-      {defaultThemes.map((theme) => (
-        <>
+      {defaultThemes.map((theme, index) => (
+        <div key={index}>
           <h2 className="name">{theme.name}</h2>
           <button onClick={() => handleClickView(theme.id)}>
             {view[theme.id] ? "⬆️" : "⬇️"}
@@ -48,7 +48,7 @@ export function Theme({ defaultThemes, handleDeleteTheme }) {
               ))}
             </article>
           )}
-        </>
+        </div>
       ))}
     </div>
   );
