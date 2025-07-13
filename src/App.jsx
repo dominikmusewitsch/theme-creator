@@ -1,11 +1,13 @@
 import "./App.css";
 import { Theme } from "./components/Theme";
 import { ThemeForm } from "./components/ThemeForm";
-import { useState } from "react";
 import { themes } from "./db";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [defaultThemes, setDefaultThemes] = useState(themes); //wie kann man den state noch etwas schöner benennen?
+  const [defaultThemes, setDefaultThemes] = useLocalStorageState("themes", {
+    defaultValue: themes,
+  }); //wie kann man den state noch etwas schöner benennen?
 
   const handleAddTheme = (event) => {
     event.preventDefault();
@@ -21,7 +23,7 @@ function App() {
         return {
           role,
           value: input.value,
-          name: `${name}-${role}`,
+          // name: `${name}-${role}`,
         };
       }
     );
