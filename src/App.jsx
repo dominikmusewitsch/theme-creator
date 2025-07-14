@@ -12,7 +12,7 @@ function App() {
   const handleAddTheme = (event) => {
     event.preventDefault();
 
-    const form = event.target.form;
+    const form = event.target;
     const name = form.addTheme.value;
     const roles = ["primary", "secondary", "surface", "surface-on"];
 

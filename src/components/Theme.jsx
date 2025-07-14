@@ -2,6 +2,8 @@ import ColorCard from "./ColorCard";
 import { ColorPreview } from "./ColorPreview";
 import { useState } from "react";
 import { EditForm } from "./EditForm";
+import { IconArrowDown, IconArrowUp } from "@tabler/icons-react";
+import "./Theme.css";
 
 export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
   const [view, setView] = useState({});
@@ -64,17 +66,32 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
   return (
     <div>
       {defaultThemes.map((theme, index) => (
-        <div key={index}>
-          <h2 className="name">{theme.name}</h2>
-          <button onClick={() => handleClickView(theme.id)}>
-            {view[theme.id]?.expanded ? "⬆️" : "⬇️"}
-          </button>
+        <div className="theme" key={index}>
+          <div className="theme__header">
+            <h2 className="theme__header-name">{theme.name}</h2>
+            <button
+              className="theme__header-button"
+              onClick={() => handleClickView(theme.id)}
+            >
+              {view[theme.id]?.expanded ? <IconArrowUp /> : <IconArrowDown />}
+            </button>
+          </div>
           {view[theme.id]?.expanded ? (
             <>
-              <button onClick={() => handleClickEdit(theme.id)}>Edit</button>
-              <button onClick={() => handleDeleteTheme(theme.id)}>
-                Delete
-              </button>
+              <div className="theme__body">
+                <button
+                  className="theme__body-edit"
+                  onClick={() => handleClickEdit(theme.id)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="theme__body-delete"
+                  onClick={() => handleDeleteTheme(theme.id)}
+                >
+                  Delete
+                </button>
+              </div>
 
               {view[theme.id]?.edit && (
                 <EditForm
@@ -99,7 +116,7 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
               </ul>
             </>
           ) : (
-            <article className="preview">
+            <article className="colorpreview">
               {theme.colors.map((color) => (
                 <ColorPreview
                   key={color.name || color.role} // "color.role" -> um fehlermeldung zu beheben in der konsole: wegen benötigten key attributes
