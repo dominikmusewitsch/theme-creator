@@ -43,6 +43,12 @@ function App() {
     setDefaultThemes(decreasedThemes);
   };
 
+  const handleEditTheme = (updatedTheme) => {
+    setDefaultThemes((prev) =>
+      prev.map((theme) => (theme.id === updatedTheme.id ? updatedTheme : theme))
+    );
+  };
+
   return (
     <>
       <header className="header">Theme Creator</header>
@@ -51,6 +57,7 @@ function App() {
         <Theme
           defaultThemes={defaultThemes}
           handleDeleteTheme={handleDeleteTheme}
+          handleEditTheme={handleEditTheme}
         />
       </main>
     </>
