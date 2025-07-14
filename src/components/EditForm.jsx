@@ -1,8 +1,13 @@
+import "./EditForm.css";
+
 export function EditForm({ handleEditTheme, colors, name }) {
   return (
-    <form onSubmit={handleEditTheme}>
-      <label htmlFor="editTheme">Edit Theme</label>
+    <form className="submitform-edit" onSubmit={handleEditTheme}>
+      <label className="submitform-edit__label" htmlFor="editTheme">
+        Edit Theme
+      </label>
       <input
+        className="submitform-edit__input"
         id="editTheme"
         type="text"
         name="editTheme"
@@ -10,9 +15,10 @@ export function EditForm({ handleEditTheme, colors, name }) {
         required
         defaultValue={name}
       />
-      <article>
+      <article className="submitform-edit__article">
         {colors.map((color, index) => (
           <input
+            className="submitform-edit__article-input"
             key={index}
             type="color"
             defaultValue={color.value}
@@ -20,7 +26,9 @@ export function EditForm({ handleEditTheme, colors, name }) {
           />
         ))}
       </article>
-      <button type="submit">Save Theme</button>
+      <button className="submitform-edit__button" type="submit">
+        Save Theme
+      </button>
     </form>
   );
 }

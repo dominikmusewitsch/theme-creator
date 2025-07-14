@@ -1,31 +1,43 @@
-.color__card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.color__info {
+.colorcard {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: 1rem auto;
+  width: 250px;
+}
+
+.colorcard__info {
   background-color: #ced4da;
-  height: 150px;
-  width: 140px;
-  border-radius: 20px 0 0 20px;
+  height: 8rem;
+  width: 8rem;
+  border-radius: 1.25rem 0 0 1.25rem;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   text-align: left;
+  padding: 0.5rem;
   text-transform: capitalize;
 }
 
-.color__swatch {
-  height: 150px;
-  width: 180px;
-  border-radius: 0 20px 20px 0;
+.colorcard__swatch {
+  height: 8rem;
+  width: 10rem;
+  border-radius: 0 1.25rem 1.25rem 0;
 }
 
-.role {
+.colorcard__info-role {
   margin: 10px 0 0 10px;
+  font-size: 1rem;
 }
 
-.value {
+.colorcard__info-name,
+.colorcard__info-value {
   margin: 0 0 0 10px;
+  font-size: 0.75rem;
 }

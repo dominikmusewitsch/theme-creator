@@ -1,0 +1,63 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.theme__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.theme__header-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  flex-grow: 0;
+  text-transform: capitalize;
+}
+
+.theme__header-button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+}
+
+.theme__body {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.theme__body-delete {
+  background-color: rgb(206, 79, 79);
+  color: white;
+  width: 50%;
+}
+
+.theme__body-edit {
+  width: 50%;
+}
+
+.colorpreview {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.colorcard__list {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
