@@ -1,8 +1,8 @@
 import "./ThemeForm.css";
 
-export function ThemeForm({ handleAddTheme }) {
+export function ThemeForm({ handleThemeFormSubmit }) {
   return (
-    <form className="submitform" onSubmit={handleAddTheme}>
+    <form className="submitform" onSubmit={handleThemeFormSubmit}>
       <label className="submitform__label" htmlFor="addTheme">
         Add a Theme
       </label>

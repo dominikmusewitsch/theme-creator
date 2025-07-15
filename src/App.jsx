@@ -5,11 +5,21 @@ import { themes } from "./db";
 import useLocalStorageState from "use-local-storage-state";
 
 function App() {
+  /*
+  |----------------------------------------------------------------------------------|
+  | Create Form to add Themes (Part 3)",                                             |
+  |----------------------------------------------------------------------------------|
+  */
+
   const [defaultThemes, setDefaultThemes] = useLocalStorageState("themes", {
     defaultValue: themes,
   }); //wie kann man den state noch etwas schöner benennen?
 
-  const handleAddTheme = (event) => {
+  const handleAddTheme = (newTheme) => {
+    setDefaultThemes((prev) => [newTheme, ...prev]);
+  };
+
+  const handleThemeFormSubmit = (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -29,14 +39,20 @@ function App() {
     );
 
     const newTheme = {
-      id: crypto.randomUUID(), // oder Date.now()
+      id: crypto.randomUUID(), // zufällig generierte id
       name,
       colors,
     };
 
-    setDefaultThemes((prev) => [newTheme, ...prev]);
+    handleAddTheme(newTheme);
     form.reset(); // optional: Formular zurücksetzen
   };
+
+  /*
+  |----------------------------------------------------------------------------------|
+  | Create Delete Button (Part 4)",                                                  |
+  |----------------------------------------------------------------------------------|
+  */
 
   const handleDeleteTheme = (id) => {
     const decreasedThemes = defaultThemes.filter((theme) => theme.id !== id); //nur objekte kommen in das neue array deren id nicht identisch sind (mit der gedrückten id)
@@ -53,7 +69,7 @@ function App() {
     <>
       <header className="header">Theme Creator</header>
       <main>
-        <ThemeForm handleAddTheme={handleAddTheme} />
+        <ThemeForm handleThemeFormSubmit={handleThemeFormSubmit} />
         <Theme
           defaultThemes={defaultThemes}
           handleDeleteTheme={handleDeleteTheme}
