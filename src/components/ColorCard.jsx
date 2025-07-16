@@ -4,7 +4,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 /*
   |----------------------------------------------------------------------------------|
-  | Create Delete Button (Part 5)",                                                  |
+  | Use Local Storage and fetch Color Names (Part 5)",                               |
   |----------------------------------------------------------------------------------|
   */
 

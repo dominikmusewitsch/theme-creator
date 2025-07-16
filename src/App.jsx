@@ -59,6 +59,12 @@ function App() {
     setDefaultThemes(decreasedThemes);
   };
 
+  /*
+  |----------------------------------------------------------------------------------|
+  | Create Edit Button (Part 6)",                                                    |
+  |----------------------------------------------------------------------------------|
+  */
+
   const handleEditTheme = (updatedTheme) => {
     setDefaultThemes((prev) =>
       prev.map((theme) => (theme.id === updatedTheme.id ? updatedTheme : theme))
