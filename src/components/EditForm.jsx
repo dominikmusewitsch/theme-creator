@@ -1,8 +1,8 @@
 import "./EditForm.css";
 
-export function EditForm({ handleEditTheme, colors, name }) {
+export function EditForm({ onSubmitEditTheme, colors, name }) {
   return (
-    <form className="submitform-edit" onSubmit={handleEditTheme}>
+    <form className="submitform-edit" onSubmit={onSubmitEditTheme}>
       <label className="submitform-edit__label" htmlFor="editTheme">
         Edit Theme
       </label>

@@ -8,28 +8,25 @@ import "./Theme.css";
 export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
   const [view, setView] = useState({});
 
-  const handleClickView = (id) => {
-    setView((prev) => {
-      const isCurrentlyExpanded = prev[id]?.expanded || false;
+  const getViewState = (id) => view[id] ?? "preview"; // beudeutung: gib view[id] zurück, aber wenn es null oder undefined ist, dann "preview" = IST AUCH DER AUSGANGSPUNKT
 
-      return {
-        ...prev, // MORGEN NOCHMAL DURCHGEHEN
-        [id]: {
-          ...prev[id],
-          expanded: !isCurrentlyExpanded,
-          edit: false,
-        },
-      };
-    });
+  const handleClickView = (id) => {
+    setView((prev) => ({
+      ...prev,
+      [id]: prev[id] === "details" ? "preview" : "details",
+    }));
   };
+
+  /*
+  |----------------------------------------------------------------------------------|
+  | Create Edit Button (Part 6)",                                                    |
+  |----------------------------------------------------------------------------------|
+  */
 
   const handleClickEdit = (id) => {
     setView((prev) => ({
       ...prev,
-      [id]: {
-        ...prev[id],
-        edit: !prev[id]?.edit,
-      },
+      [id]: "edit",
     }));
   };
 
@@ -56,10 +53,7 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
 
     setView((prev) => ({
       ...prev,
-      [id]: {
-        ...prev[id],
-        edit: false,
-      },
+      [id]: "details",
     }));
   };
 
@@ -73,10 +67,17 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
               className="theme__header-button"
               onClick={() => handleClickView(theme.id)}
             >
-              {view[theme.id]?.expanded ? <IconArrowUp /> : <IconArrowDown />}
+              {getViewState(theme.id) === "edit" ? ( //das hier ist eine Erweiterte Bedingung, damit ich auch ein Edit Abbrechen Button darstellen kann
+                "❌"
+              ) : getViewState(theme.id) === "details" ? (
+                <IconArrowUp />
+              ) : (
+                <IconArrowDown />
+              )}
             </button>
           </div>
-          {view[theme.id]?.expanded ? (
+
+          {getViewState(theme.id) === "details" && (
             <>
               <div className="theme__body">
                 <button
@@ -92,17 +93,6 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
                   Delete
                 </button>
               </div>
-
-              {view[theme.id]?.edit && (
-                <EditForm
-                  handleEditTheme={(event) =>
-                    onSubmitEditTheme(event, theme.id)
-                  }
-                  name={theme.name}
-                  colors={theme.colors}
-                />
-              )}
-
               <ul className="colorcard__list">
                 <li key={theme.id}>
                   {theme.colors.map((color) => (
@@ -115,13 +105,22 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
                 </li>
               </ul>
             </>
-          ) : (
+          )}
+
+          {getViewState(theme.id) === "edit" && (
+            <EditForm
+              onSubmitEditTheme={(event) => onSubmitEditTheme(event, theme.id)}
+              name={theme.name}
+              colors={theme.colors}
+            />
+          )}
+
+          {getViewState(theme.id) === "preview" && ( // zeigt die colorpreview, wenn keine ansicht für dieses theme gesetzt ist
             <article className="colorpreview">
               {theme.colors.map((color) => (
                 <ColorPreview
                   key={color.name || color.role} // "color.role" -> um fehlermeldung zu beheben in der konsole: wegen benötigten key attributes
                   value={color.value}
-                  role={color.role}
                 />
               ))}
             </article>
