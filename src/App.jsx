@@ -9,6 +9,10 @@ function App() {
   |----------------------------------------------------------------------------------|
   | Create Form to add Themes (Part 3)",                                             |
   |----------------------------------------------------------------------------------|
+  | - create ThemeForm component
+  | - implement useState to save current themes
+  | - create handleAddTheme to define how theme state will change by adding new theme
+  | - define function for form  
   */
 
   const [defaultThemes, setDefaultThemes] = useLocalStorageState("themes", {
@@ -38,11 +42,15 @@ function App() {
       }
     );
 
+    // console.log(colors);
+
     const newTheme = {
       id: crypto.randomUUID(), // zufällig generierte id
       name,
       colors,
     };
+
+    // console.log(newTheme);
 
     handleAddTheme(newTheme);
     form.reset(); // optional: Formular zurücksetzen
@@ -52,6 +60,8 @@ function App() {
   |----------------------------------------------------------------------------------|
   | Create Delete Button (Part 4)",                                                  |
   |----------------------------------------------------------------------------------|
+  | - create handleDelete Function to define how theme state will change by removing a theme
+  | - forward the handler function to the Themes component where its implemented inside delete button 
   */
 
   const handleDeleteTheme = (id) => {
@@ -63,6 +73,8 @@ function App() {
   |----------------------------------------------------------------------------------|
   | Create Edit Button (Part 6)",                                                    |
   |----------------------------------------------------------------------------------|
+  | - create handleEditTheme Function to define how theme state will change by adjusting a theme
+  | 
   */
 
   const handleEditTheme = (updatedTheme) => {
