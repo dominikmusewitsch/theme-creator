@@ -8,10 +8,21 @@ import "./Theme.css";
 export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
   const [view, setView] = useState({});
 
+  /*
+  |----------------------------------------------------------------------------------|
+  | Create Preview Toggle (Part 2)",                                                 |
+  |----------------------------------------------------------------------------------|
+  | - create ColorPreview.jsx
+  | - implement useState to save view of ColorCard or ColorPreview
+  | - handleClickView to switch states 
+  | - define view states in return 
+  */
+
   const getViewState = (id) => view[id] ?? "preview"; // beudeutung: gib view[id] zurück, aber wenn es null oder undefined ist, dann "preview" = IST AUCH DER AUSGANGSPUNKT
 
   const handleClickView = (id) => {
     setView((prev) => ({
+      //mit dieser Schreibweise baue ich auf dem aktuellen zustand auf und ersetze nicht alles
       ...prev,
       [id]: prev[id] === "details" ? "preview" : "details",
     }));
@@ -21,6 +32,9 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
   |----------------------------------------------------------------------------------|
   | Create Edit Button (Part 6)",                                                    |
   |----------------------------------------------------------------------------------|
+  | - create handleClickEdit function to define how view state will change by choosing "edit"
+  | - define function for submit form 
+  | - define "edit" view state in return 
   */
 
   const handleClickEdit = (id) => {
@@ -37,6 +51,7 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
     const newName = form.editTheme.value;
 
     const newColors = Array.from(
+      // Array.from wandelt NodeList in einen Array um, damit ich es anschließend mappen kann
       form.querySelectorAll("input[type='color']")
     ).map((input) => ({
       role: input.name,
@@ -59,8 +74,8 @@ export function Theme({ defaultThemes, handleDeleteTheme, handleEditTheme }) {
 
   return (
     <div>
-      {defaultThemes.map((theme, index) => (
-        <div className="theme" key={index}>
+      {defaultThemes.map((theme) => (
+        <div className="theme" key={theme.id}>
           <div className="theme__header">
             <h2 className="theme__header-name">{theme.name}</h2>
             <button

@@ -2,13 +2,16 @@ import { useEffect } from "react";
 import "./ColorCard.css";
 import useLocalStorageState from "use-local-storage-state";
 
-/*
+export default function ColorCard({ role, value }) {
+  /*
   |----------------------------------------------------------------------------------|
   | Use Local Storage and fetch Color Names (Part 5)",                               |
   |----------------------------------------------------------------------------------|
+  | - useLocalStorageState will save info within the browser 
+  | - implemnt useEffet because of async function to fetch API names 
+  | - use setColorName to save new color name 
   */
 
-export default function ColorCard({ role, value }) {
   const [colorName, setColorName] = useLocalStorageState(`colorName-${value}`, {
     defaultValue: "",
   }); // jeder key brauch einen individuellen namen, ansonsten sind haben alle colorcards den selben namen
@@ -25,7 +28,7 @@ export default function ColorCard({ role, value }) {
       setColorName(data.name.value);
     }
     getColorName();
-  }, [value]); // sorgt dafür dass es nur bei neuen Farbwerten ausgeführt wird
+  }, [setColorName, value]); // sorgt dafür dass es nur bei neuen Farbwerten oder neuen Namen ausgeführt wird --- hätte theoretisch auch nur value drin haben können, weil setColorName "stabil" ist
 
   /*
   |----------------------------------------------------------------------------------|
